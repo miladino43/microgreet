@@ -1,6 +1,7 @@
 version: '3.4'
 
 networks:
+  # would use the public for nginx if it was used
   public:
   private:
 
