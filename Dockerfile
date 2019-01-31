@@ -1,4 +1,30 @@
-FROM python:3.6-alpine
+FROM python:3.6-alpine as tester
+
+LABEL maintainer="Milad B"
+
+ENV PYTHONUNBUFFERED 1
+
+RUN mkdir /config /src /docker
+
+ADD config/requirements.pip /config/
+
+COPY src /src 
+
+ADD entrypoint.sh /docker/
+
+RUN set -ex \
+    && apk add --no-cache --virtual .crypto-rundeps \
+	--repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
+	libressl2.7-libcrypto \ 
+	&& apk add --no-cache curl \
+    && pip install -U pip \
+    && LIBRARY_PATH=/lib:/usr/lib /bin/sh -c "pip install --no-cache-dir -r /config/requirements.pip"
+
+WORKDIR /src
+
+RUN python manage.py test
+
+FROM python:3.6-alpine as builder
 
 LABEL maintainer="Milad B"
 
