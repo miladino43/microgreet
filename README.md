@@ -10,6 +10,7 @@ The docker file is multi-stage. One stage is for testing and the other is to bui
 ```
 docker build --target tester -t miladino/hello-django:test .
 ```
+The output of this step will show the test results
 ### To build the final image
 ```
 docker build --target builder -t miladino/hello-django:1.3 .
@@ -62,14 +63,23 @@ Make sure the aws cli credentials are set.
 - DefaultContainerCpu = Amount of CPU for the containers. default 256
 - DefaultContainerMemory = Amount of CPU for the containers. default 512
 - DefaultServiceCpuScaleOutThreshold = Average CPU value to trigger auto scaling out. default 50
+
+
+Make sure a cluster with the name provided to  --stack-name does not exist other wise the stack will not get created.
+In the example belw the stack name is greetings-stack.
 ```
 aws cloudformation create-stack --stack-name greetings-stack --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" --template-body file://cloudformation-prod.json --parameters ParameterKey=VpcId,ParameterValue=vpc-###### \
 ParameterKey=SubnetId,ParameterValue=subnet-##### \
 ParameterKey=ExecutionRoleArn,ParameterValue='arn:aws:iam::#########:role/ecsTaskExecutionRole'
 ```
 You can also use the aws console to run the cloudformation template
+
+### TO access the service
+- navigate to localhost if you are deploying locally
+- navigate to the public ip of the task. This value can be found in the aws console. Go to ECS>your cluster>your service>Tasks>click on task number
 #### Improvements:
 - Add nginx infront of service
 - create the network with cloudformation (vpc, subnet)
 - create a hosted zone on route53 and separate the nginx service from the greeting service
 - take in image tags as parameters in the cloudformation
+- output the public ip of the task(Not sure if possible)
