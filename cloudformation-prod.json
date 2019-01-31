@@ -43,7 +43,7 @@
       "Type":"AWS::ECS::Cluster",
       "Properties" : {
         "ClusterName" : {
-          "Ref": "AWS::"
+          "Ref": "AWS::StackName"
         }
       }
     },
