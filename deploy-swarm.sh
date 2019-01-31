@@ -10,4 +10,4 @@ fi
 
 export TAG=$TAG
 
-docker stack deploy -c docker-compose.yml myhello
+docker stack deploy -c docker-compose-dev.yml devhello

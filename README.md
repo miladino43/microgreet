@@ -14,16 +14,23 @@ docker build --target tester -t miladino/hello-django:test .
 ```
 docker build --target builder -t miladino/hello-django:1.3 .
 ```
-### Run the container 
+### Run standalone container 
 ```
 docker container run -d -p 80:8000 miladino/hello-django:1.3
 ```
-or 
+### Run swarm for dev 
 ```
-./deploy.sh <image-tag>
+./deploy-swarm.sh <image-tag>
 ```
 ```
-./deploy.sh 1.3
+./deploy-swarm.sh 1.3
+```
+### Run compose  
+```
+./deploy-compose.sh <image-tag>
+```
+```
+./deploy-compose.sh 1.3
 ```
 You can also use the jenkins image to build and test.
 ### To run the prod stack
@@ -65,3 +72,4 @@ You can also use the aws console to run the cloudformation template
 - Add nginx infront of service
 - create the network with cloudformation (vpc, subnet)
 - create a hosted zone on route53 and separate the nginx service from the greeting service
+- take in image tags as parameters in the cloudformation
