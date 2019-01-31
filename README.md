@@ -20,7 +20,10 @@ docker container run -d -p 80:8000 miladino/hello-django:1.3
 ```
 or 
 ```
-docker stack deploy -c docker-compose.yml myhello
+./deploy.sh <image-tag>
+```
+```
+./deploy.sh 1.3
 ```
 You can also use the jenkins image to build and test.
 ### To run the prod stack
