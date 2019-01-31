@@ -1,0 +1,32 @@
+version: '3.4'
+
+networks:
+  public:
+  private:
+
+volumes:
+  static-content:
+
+services:  
+  nginx:
+    image: miladino/hello-nginx:1.4
+    networks:
+      - public
+      - private
+    ports:
+      - "80:80"
+    depends_on:
+      - greetings
+  greeting:
+    image: miladino/hello-django:1.3
+    networks:
+      private:
+        aliases:
+          - greeting.local
+    environment:
+      - DJANGO_MANAGEPY_COLLECTSTATIC=on
+      - DEBUG=True
+      - LOG_LEVEL=debug
+    volumes:
+      - static-content:/src/tutorial/static
+      - ./src:/src
