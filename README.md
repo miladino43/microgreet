@@ -77,6 +77,18 @@ You can also use the aws console to run the cloudformation template
 ### TO access the service
 - navigate to localhost if you are deploying locally
 - navigate to the public ip of the task. This value can be found in the aws console. Go to ECS>your cluster>your service>Tasks>click on task number
+### JENKINS
+There is a jenkins image that has been made that you can use. The image is quite big. Did not have time to improve the image size.
+```
+docker container run -d -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock miladino/hello-jenkins:2.0
+```
+##### Creds
+username:admin
+password:AdminPassword
+
+The Project is called Build-Greetings-Version. The parameter it asks for is the git tag you would like to use so make sure it exists.
+You can use 1.4 as a test since that tag is present on github
+
 #### Improvements:
 - Add nginx infront of service
 - create the network with cloudformation (vpc, subnet)
