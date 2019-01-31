@@ -29,7 +29,25 @@ Make sure the aws cli credentials are set.
 - VpcId = the vpc you would like to use 
 - SubnetId = the subnet to use (belonging to VpcId)
 - ExecutionRoleArn = The execution IAM role for the task. This is needed for cloudwatch log creation
-
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ecr:GetAuthorizationToken",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
 ##### These parameters are optional:
 - DefaultContainerCpu = Amount of CPU for the containers. default 256
 - DefaultContainerMemory = Amount of CPU for the containers. default 512
