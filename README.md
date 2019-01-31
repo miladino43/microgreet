@@ -68,7 +68,9 @@ Make sure the aws cli credentials are set.
 Make sure a cluster with the name provided to  --stack-name does not exist other wise the stack will not get created.
 In the example belw the stack name is greetings-stack.
 ```
-aws cloudformation create-stack --stack-name greetings-stack --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" --template-body file://cloudformation-prod.json --parameters ParameterKey=VpcId,ParameterValue=vpc-###### \
+aws cloudformation create-stack --stack-name greetings-stack --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" \
+--template-body file://cloudformation-prod.json \
+--parameters ParameterKey=VpcId,ParameterValue=vpc-###### \
 ParameterKey=SubnetId,ParameterValue=subnet-##### \
 ParameterKey=ExecutionRoleArn,ParameterValue='arn:aws:iam::#########:role/ecsTaskExecutionRole'
 ```
